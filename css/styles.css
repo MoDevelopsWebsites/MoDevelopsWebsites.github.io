@@ -243,6 +243,10 @@ body {
     margin: 0 auto;
 }
 
+.section-description {
+    text-align: center;
+}
+
 .section-title {
     text-align: center;
     font-size: 3rem;
@@ -662,4 +666,82 @@ body {
     .section-title {
         font-size: 2rem;
     }
+}
+
+/* Nitro Boosts Section */
+.nitro-boosts-section {
+    padding: 6rem 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.boost-duration-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0 4rem;
+}
+
+.boost-tab {
+    background: rgba(31, 41, 55, 0.5);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.boost-tab:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--text);
+    border-color: var(--primary);
+}
+
+.boost-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.boost-packages {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.boost-packages.hidden {
+    display: none;
+}
+
+.boost-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.boost-card .product-header {
+    justify-content: center;
+    text-align: center;
+}
+
+.boost-card .product-header h2 {
+    text-align: center;
+}
+
+.boost-details {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.boost-duration {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.boost-card .purchase-button {
+    margin: 0 auto;
+    justify-content: center;
 }

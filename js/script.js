@@ -5,13 +5,33 @@ lucide.createIcons();
 document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileNav = document.querySelector('.mobile-nav');
-    const menuIcon = menuBtn.querySelector('i');
+    const menuIcon = menuBtn?.querySelector('i');
 
-    menuBtn.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-        const isOpen = mobileNav.classList.contains('active');
-        menuIcon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+    menuBtn?.addEventListener('click', () => {
+        mobileNav?.classList.toggle('active');
+        const isOpen = mobileNav?.classList.contains('active');
+        menuIcon?.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
         lucide.createIcons();
+    });
+
+    // Boost duration tabs functionality
+    const boostTabs = document.querySelectorAll('.boost-tab');
+    const boostPackages = document.querySelectorAll('.boost-packages');
+
+    boostTabs?.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            boostTabs.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            tab.classList.add('active');
+
+            // Hide all packages
+            boostPackages.forEach(pkg => pkg.classList.add('hidden'));
+            // Show selected package
+            const duration = tab.getAttribute('data-duration');
+            const selectedPackage = document.getElementById(duration);
+            selectedPackage?.classList.remove('hidden');
+        });
     });
 
     // Testimonials slider functionality
@@ -23,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (track && cards.length > 0) {
         let currentIndex = 0;
-        const cardWidth = cards[0].offsetWidth;
         
         // Create dots
         cards.forEach((_, index) => {
@@ -31,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.classList.add('slider-dot');
             if (index === 0) dot.classList.add('active');
             dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
-            dotsContainer.appendChild(dot);
+            dotsContainer?.appendChild(dot);
             
             dot.addEventListener('click', () => {
                 goToSlide(index);
@@ -62,18 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
             goToSlide(currentIndex);
         }
         
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
+        nextBtn?.addEventListener('click', nextSlide);
+        prevBtn?.addEventListener('click', prevSlide);
         
         // Auto-advance slides
         let slideInterval = setInterval(nextSlide, 5000);
         
         // Pause auto-advance on hover
-        track.addEventListener('mouseenter', () => {
+        track?.addEventListener('mouseenter', () => {
             clearInterval(slideInterval);
         });
         
-        track.addEventListener('mouseleave', () => {
+        track?.addEventListener('mouseleave', () => {
             slideInterval = setInterval(nextSlide, 5000);
         });
     }
@@ -87,19 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
             contactForm.reset();
         });
     }
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
 
     // Intersection Observer for fade-in animations
     const observerOptions = {
