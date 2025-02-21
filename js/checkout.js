@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentStep === 'email') {
             currentStep = 'payment';
             updateProgress(currentStep);
-            initializeStripe();
+            initializePaymentOptions();
         }
     });
 
@@ -110,35 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     });
 
-    // Initialize Stripe
-    let stripe, elements, card;
-
-    function initializeStripe() {
-        stripe = Stripe('pk_test_51Qr2wKAY8bH1c4AOZDSOkdMpGdpzSTQDOX5d5Cd7ADI2FSIWoDJn8pcS8Tn0IfCc7sUY9aT7SV8iUSNBZPVjCPlA00TIHE2fRf');
-        elements = stripe.elements({
-            appearance: {
-                theme: 'night',
-                variables: {
-                    colorPrimary: '#3b82f6',
-                    colorBackground: 'rgba(31, 41, 55, 0.5)',
-                    colorText: '#ffffff',
-                    colorDanger: '#ef4444',
-                    fontFamily: 'system-ui, -apple-system, sans-serif',
-                }
-            }
-        });
-
-        card = elements.create('card');
-        card.mount('#card-element');
-
-        card.addEventListener('change', ({error}) => {
-            const displayError = document.getElementById('card-errors');
-            if (error) {
-                displayError.textContent = error.message;
-            } else {
-                displayError.textContent = '';
-            }
-        });
+    // Initialize payment options
+    function initializePaymentOptions() {
+        // Map of product names to their Stripe links
+        const stripeLinks = {
+            'Premium Tweaks Bundle': 'https://buy.stripe.com/aEUaHBcHYdbD8RW5kk',
+            'Input Delay Tweaks': 'https://buy.stripe.com/7sI4jd7nEefH7NS5kn',
+            'FPS Tweaks': 'https://buy.stripe.com/bIY9Dx4bs2wZ4BG5kl',
+            'Ping Tweaks': 'https://buy.stripe.com/fZebLF5fw4F70lq5ko',
+            // Add other products here
+        };
 
         // Add pay button to card section
         const cardSection = document.querySelector('.payment-option.card');
@@ -146,49 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
         payButton.className = 'continue-button';
         payButton.style.marginTop = '1rem';
         payButton.innerHTML = `
-            <span>Pay Now</span>
+            <span>Pay with Card</span>
             <i data-lucide="credit-card"></i>
         `;
         cardSection.appendChild(payButton);
         lucide.createIcons();
 
-        // Handle payment submission
-        payButton.addEventListener('click', async (e) => {
-            e.preventDefault();
-            payButton.disabled = true;
-            payButton.innerHTML = '<span>Processing...</span>';
-
-            try {
-                const {error} = await stripe.confirmPayment({
-                    elements,
-                    confirmParams: {
-                        return_url: `${window.location.origin}/confirmation.html`,
-                        payment_method_data: {
-                            billing_details: {
-                                email: emailInput.value
-                            }
-                        }
-                    }
-                });
-
-                if (error) {
-                    const errorElement = document.getElementById('card-errors');
-                    errorElement.textContent = error.message;
-                    payButton.disabled = false;
-                    payButton.innerHTML = `
-                        <span>Pay Now</span>
-                        <i data-lucide="credit-card"></i>
-                    `;
-                    lucide.createIcons();
-                }
-            } catch (e) {
-                console.error('Error:', e);
-                payButton.disabled = false;
-                payButton.innerHTML = `
-                    <span>Pay Now</span>
-                    <i data-lucide="credit-card"></i>
-                `;
-                lucide.createIcons();
+        // Handle Stripe redirect
+        payButton.addEventListener('click', () => {
+            const stripeLink = stripeLinks[productName];
+            if (stripeLink) {
+                window.location.href = stripeLink;
+            } else {
+                const errorElement = document.getElementById('card-errors');
+                errorElement.textContent = 'Product not found. Please try again.';
             }
         });
     }
@@ -213,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (emailInput) emailInput.value = savedEmail;
         updateProgress(currentStep);
         if (currentStep === 'payment') {
-            initializeStripe();
+            initializePaymentOptions();
         }
     }
 });
