@@ -79,7 +79,7 @@ const Contact = () => {
               <Clock className="w-6 h-6 text-primary" />
               <div>
                 <h3 className="font-semibold">Business Hours</h3>
-                <p className="text-muted-foreground">Monday - Friday: 9AM - 6PM EST</p>
+                <p className="text-muted-foreground">Monday - Sunday: 9AM - 6PM EST</p>
               </div>
             </div>
 
@@ -87,7 +87,7 @@ const Contact = () => {
               <MapPin className="w-6 h-6 text-primary" />
               <div>
                 <h3 className="font-semibold">Location</h3>
-                <p className="text-muted-foreground">United States</p>
+                <p className="text-muted-foreground">United Kingdom</p>
               </div>
             </div>
           </motion.div>
