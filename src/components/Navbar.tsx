@@ -34,7 +34,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
         <Link to="/" className="flex items-center space-x-2">
-  <img src="./favicon.png" alt="Logo" className="h-8 w-8" />
+  <img src="https://static.vecteezy.com/system/resources/previews/003/108/052/non_2x/lightning-bolt-logo-or-icon-vector.jpg" alt="Logo" className="h-8 w-8" />
   <span className="font-bold text-xl">Stunnas Tweaks</span>
 </Link>
           {/* Desktop Navigation */}
