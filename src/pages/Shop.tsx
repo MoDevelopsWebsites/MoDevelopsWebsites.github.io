@@ -41,7 +41,7 @@ const premiumTweaks = [
     name: 'FPS Tweaks',
     price: 15,
     stripeLink: 'https://buy.stripe.com/bIY9Dx4bs2wZ4BG5kl',
-    description: 'Boost your frames per second',
+    description: 'Boost your frames per second, and fixes stuttering',
     features: [
       'GPU Optimization',
       'CPU Priority Settings',
