@@ -66,22 +66,22 @@ const premiumTweaks = [
 
 const serverBoosts = {
   oneMonth: [
-    { id: 'boost-2-1m', name: '2 Boosts', price: 10, duration: '1 Month', stripeLink: 'https://buy.stripe.com/28o7vp8rI4F73xC3ck' },
-    { id: 'boost-6-1m', name: '6 Boosts', price: 25, duration: '1 Month', stripeLink: 'https://buy.stripe.com/cN202XeQ66Nf8RW9AJ' },
-    { id: 'boost-8-1m', name: '8 Boosts', price: 30, duration: '1 Month', stripeLink: 'https://buy.stripe.com/14k7vp8rIefH9W028i' },
-    { id: 'boost-14-1m', name: '14 Boosts', price: 45, duration: '1 Month', stripeLink: 'https://buy.stripe.com/aEU7vpgYe5Jbgko8wH' },
-    { id: 'boost-30-1m', name: '30 Boosts', price: 90, duration: '1 Month', stripeLink: 'https://buy.stripe.com/6oE8zt7nE7Rj7NS6oA' }
+    { id: 'boost-2-1m', name: '2 Boosts', price: 3, duration: '1 Month', stripeLink: 'https://buy.stripe.com/28o7vp8rI4F73xC3ck' },
+    { id: 'boost-6-1m', name: '6 Boosts', price: 7, duration: '1 Month', stripeLink: 'https://buy.stripe.com/cN202XeQ66Nf8RW9AJ' },
+    { id: 'boost-8-1m', name: '8 Boosts', price: 10, duration: '1 Month', stripeLink: 'https://buy.stripe.com/14k7vp8rIefH9W028i' },
+    { id: 'boost-14-1m', name: '14 Boosts', price: 15, duration: '1 Month', stripeLink: 'https://buy.stripe.com/aEU7vpgYe5Jbgko8wH' },
+    { id: 'boost-30-1m', name: '30 Boosts', price: 30, duration: '1 Month', stripeLink: 'https://buy.stripe.com/6oE8zt7nE7Rj7NS6oA' }
   ],
   threeMonths: [
-    { id: 'boost-2-3m', name: '2 Boosts', price: 25, duration: '3 Months', stripeLink: 'https://buy.stripe.com/28o9Dx23k6NfgkoaER' },
-    { id: 'boost-6-3m', name: '6 Boosts', price: 65, duration: '3 Months', stripeLink: 'https://buy.stripe.com/4gw8zt4bs7Rj6JOdR4' },
-    { id: 'boost-8-3m', name: '8 Boosts', price: 80, duration: '3 Months', stripeLink: 'https://buy.stripe.com/dR602X0Zgc7zd8c7sH' },
-    { id: 'boost-14-3m', name: '14 Boosts', price: 120, duration: '3 Months', stripeLink: 'https://buy.stripe.com/3cs4jd9vM6Nf4BGfZe' },
-    { id: 'boost-30-3m', name: '30 Boosts', price: 240, duration: '3 Months', stripeLink: 'https://buy.stripe.com/14kaHBazQ4F7d8c4gx' }
+    { id: 'boost-2-3m', name: '2 Boosts', price: 5, duration: '3 Months', stripeLink: 'https://buy.stripe.com/28o9Dx23k6NfgkoaER' },
+    { id: 'boost-6-3m', name: '6 Boosts', price: 12, duration: '3 Months', stripeLink: 'https://buy.stripe.com/4gw8zt4bs7Rj6JOdR4' },
+    { id: 'boost-8-3m', name: '8 Boosts', price: 18, duration: '3 Months', stripeLink: 'https://buy.stripe.com/dR602X0Zgc7zd8c7sH' },
+    { id: 'boost-14-3m', name: '14 Boosts', price: 25, duration: '3 Months', stripeLink: 'https://buy.stripe.com/3cs4jd9vM6Nf4BGfZe' },
+    { id: 'boost-30-3m', name: '30 Boosts', price: 40, duration: '3 Months', stripeLink: 'https://buy.stripe.com/14kaHBazQ4F7d8c4gx' }
   ],
   oneYear: [
-    { id: 'boost-14-1y', name: '14 Boosts', price: 400, duration: '1 Year', stripeLink: 'https://buy.stripe.com/bIY4jdazQ7Rj5FK00i' },
-    { id: 'boost-30-1y', name: '30 Boosts', price: 800, duration: '1 Year', stripeLink: 'https://buy.stripe.com/dR6dTN37oc7z1pu3cv' }
+    { id: 'boost-14-1y', name: '14 Boosts', price: 120, duration: '1 Year', stripeLink: 'https://buy.stripe.com/bIY4jdazQ7Rj5FK00i' },
+    { id: 'boost-30-1y', name: '30 Boosts', price: 175, duration: '1 Year', stripeLink: 'https://buy.stripe.com/dR6dTN37oc7z1pu3cv' }
   ]
 };
 
@@ -182,7 +182,7 @@ const Shop = () => {
                     </ul>
                   </motion.div>
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-bold text-primary">${product.price}</p>
+                    <p className="text-2xl font-bold text-primary">£{product.price}</p>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -263,7 +263,7 @@ const Shop = () => {
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-bold text-primary">${boost.price}</p>
+                    <p className="text-2xl font-bold text-primary">£{boost.price}</p>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
