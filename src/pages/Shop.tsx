@@ -41,7 +41,7 @@ const premiumTweaks = [
     name: 'FPS Tweaks',
     price: 15,
     stripeLink: 'https://buy.stripe.com/bIY9Dx4bs2wZ4BG5kl',
-    description: 'Boost your frames per second, and fixes stuttering',
+    description: 'Boost your frames per second',
     features: [
       'GPU Optimization',
       'CPU Priority Settings',
@@ -182,7 +182,7 @@ const Shop = () => {
                     </ul>
                   </motion.div>
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-bold text-primary">£{product.price}</p>
+                    <p className="text-2xl font-bold text-primary">${product.price}</p>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -263,7 +263,7 @@ const Shop = () => {
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-bold text-primary">£{boost.price}</p>
+                    <p className="text-2xl font-bold text-primary">${boost.price}</p>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}

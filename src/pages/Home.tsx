@@ -29,6 +29,18 @@ const testimonials = [
     role: "Content Creator",
     content: "The premium bundle is a game-changer. My streams are now butter-smooth with zero lag.",
     image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&h=400&fit=crop"
+  },
+  {
+    name: "Emily Parker",
+    role: "Tournament Player",
+    content: "These optimizations gave me the competitive edge I needed. Outstanding results!",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop"
+  },
+  {
+    name: "David Kim",
+    role: "Professional Streamer",
+    content: "Best investment for my streaming setup. The difference is night and day!",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop"
   }
 ];
 
@@ -248,30 +260,50 @@ const Home = () => {
           >
             What Our Users Say
           </motion.h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            centeredSlides={true}
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+            modules={[Autoplay]}
+            className="testimonials-swiper"
+          >
             {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-card p-6 rounded-lg shadow-lg"
-              >
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <h3 className="font-semibold">{testimonial.name}</h3>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+              <SwiperSlide key={index}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className="bg-card p-6 rounded-lg shadow-lg h-full"
+                >
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full mr-4"
+                    />
+                    <div>
+                      <h3 className="font-semibold">{testimonial.name}</h3>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
                   </div>
-                </div>
-                <p className="text-muted-foreground">{testimonial.content}</p>
-              </motion.div>
+                  <p className="text-muted-foreground">{testimonial.content}</p>
+                </motion.div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </motion.section>
 

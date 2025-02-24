@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShoppingCart, Menu, X, Monitor } from 'lucide-react';
+import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useCart } from 'react-use-cart';
 
 const Navbar = () => {
@@ -33,10 +33,11 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center space-x-2">
-  <img src="https://cdn-icons-png.flaticon.com/256/17836/17836096.png" alt="Logo" className="h-8 w-8" />
-  <span className="font-bold text-xl">Stunnas Tweaks</span>
-</Link>
+          <Link to="/" className="flex items-center space-x-2">
+          <img src="https://cdn-icons-png.flaticon.com/256/17836/17836096.png" alt="Logo" className="h-8 w-8" />
+            <span className="font-bold text-xl">Stunnas Tweaks</span>
+          </Link>
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (

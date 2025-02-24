@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Contact from './pages/Contact';
 import Cart from './pages/Cart';
+import ChatBot from './components/ChatBot';
 import { CartProvider } from 'react-use-cart';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
+          <ChatBot />
           <Toaster position="bottom-right" />
         </div>
       </Router>

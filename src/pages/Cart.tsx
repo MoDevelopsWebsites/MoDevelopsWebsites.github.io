@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from 'react-use-cart';
 import { toast } from 'react-hot-toast';
-import { Trash2 } from 'lucide-react';
+import { Trash2, MessageSquare } from 'lucide-react';
 
 const Cart = () => {
   const {
@@ -15,13 +15,39 @@ const Cart = () => {
   } = useCart();
 
   const handlePaypalCheckout = () => {
-    // Implement PayPal checkout logic
-    window.location.href = `https://paypal.me/AshirHassan629/${cartTotal}`;
+    showDiscordPrompt();
+    window.open(`https://paypal.me/AshirHassan629/${cartTotal}`, '_blank');
   };
 
   const handleStripeCheckout = (item: any) => {
-    // Redirect to Stripe payment link
-    window.location.href = item.stripeLink;
+    showDiscordPrompt();
+    window.open(item.stripeLink, '_blank');
+  };
+
+  const showDiscordPrompt = () => {
+    toast((t) => (
+      <div className="flex flex-col items-center space-y-2">
+        <MessageSquare className="w-6 h-6 text-blue-500" />
+        <p className="text-sm font-medium">After payment, please join our Discord server:</p>
+        <a
+          href="https://discord.gg/PCDJ2Sc98D"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:text-blue-600 underline"
+        >
+          Join Discord Server
+        </a>
+        <p className="text-xs text-gray-500">Create a support ticket to redeem your purchase</p>
+      </div>
+    ), {
+      duration: 10000,
+      position: 'top-center',
+      style: {
+        background: '#fff',
+        color: '#000',
+        padding: '1rem',
+      },
+    });
   };
 
   return (
@@ -51,7 +77,7 @@ const Cart = () => {
                 >
                   <div>
                     <h3 className="font-semibold">{item.name}</h3>
-                    <p className="text-muted-foreground">£{item.price}</p>
+                    <p className="text-muted-foreground">${item.price}</p>
                   </div>
                   <div className="flex items-center space-x-4">
                     <button
@@ -70,7 +96,7 @@ const Cart = () => {
               <div className="space-y-2 mb-6">
                 <div className="flex justify-between">
                   <span>Total</span>
-                  <span className="font-semibold">£{cartTotal}</span>
+                  <span className="font-semibold">${cartTotal}</span>
                 </div>
               </div>
               <div className="space-y-3">
@@ -86,7 +112,7 @@ const Cart = () => {
                     onClick={() => handleStripeCheckout(item)}
                     className="w-full bg-primary text-white py-3 rounded-md hover:bg-primary/90 transition-colors"
                   >
-                    Pay with Card (£{item.price})
+                    Pay with Card (${item.price})
                   </button>
                 ))}
               </div>
