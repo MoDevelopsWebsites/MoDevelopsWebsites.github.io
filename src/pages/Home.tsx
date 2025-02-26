@@ -379,14 +379,12 @@ const Home = () => {
                   onBlur={() => setIsEmailFocused(false)}
                   className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                 />
-                <motion.button
+                <button
                   type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/90 transition-colors"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground px-6 py-2 rounded-md hover:bg-primary/90 transition-colors"
                 >
                   Subscribe
-                </motion.button>
+                </button>
               </div>
             </form>
           </motion.div>

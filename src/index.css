@@ -193,3 +193,25 @@
   transform: translateY(-5px);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
+
+/* Gaming background glow effects */
+.gaming-glow {
+  position: relative;
+}
+
+.gaming-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 100, 255, 0.15), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.gaming-glow-red::after {
+  background: radial-gradient(circle at center, rgba(255, 0, 0, 0.15), transparent 70%);
+}
+
+.gaming-glow-green::after {
+  background: radial-gradient(circle at center, rgba(0, 255, 0, 0.15), transparent 70%);
+}
