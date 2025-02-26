@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-import { Star, Users, Zap, Trophy, ArrowRight } from 'lucide-react';
+import { Star, Users, Zap, Trophy, ArrowRight, MessageSquare, Cpu, Gauge, Clock, Award, Shield, Headphones, BarChart, Gamepad } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 
@@ -41,11 +41,24 @@ const testimonials = [
   }
 ];
 
-const stats = [
-  { icon: Users, label: "Active Users", value: "50K+" },
-  { icon: Zap, label: "Server Boosts", value: "100K+" },
-  { icon: Star, label: "5-Star Reviews", value: "10K+" },
-  { icon: Trophy, label: "Tournament Winners", value: "500+" }
+// First row of stats for the marquee
+const statsRow1 = [
+  { icon: Cpu, label: "FPS Increase", value: "Up to 40%" },
+  { icon: Clock, label: "Input Delay Reduction", value: "Up to 30%" },
+  { icon: Gauge, label: "Network Latency", value: "Reduced by 25%" },
+  { icon: Award, label: "Tournament Winners", value: "500+" },
+  { icon: Users, label: "Satisfied Clients", value: "10,000+" },
+  { icon: Shield, label: "Anti-Cheat Safe", value: "100%" },
+];
+
+// Second row of stats for the marquee (in reverse direction)
+const statsRow2 = [
+  { icon: Headphones, label: "Pro Teams Served", value: "50+" },
+  { icon: BarChart, label: "Performance Gain", value: "Up to 35%" },
+  { icon: Gamepad, label: "Games Supported", value: "100+" },
+  { icon: Star, label: "5-Star Reviews", value: "2,500+" },
+  { icon: Zap, label: "Instant Delivery", value: "24/7" },
+  { icon: Trophy, label: "Years of Experience", value: "7+" },
 ];
 
 const featuredProducts = [
@@ -83,59 +96,141 @@ const Home = () => {
   return (
     <div className="relative">
       {/* Hero Section */}
-      <div ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden bg-pattern">
+      <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-pattern py-24">
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background pointer-events-none" />
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={heroInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative z-10 text-center px-4"
+          className="relative z-10 text-center px-4 max-w-5xl mx-auto"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Stunnas Tweaks
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+              Professional Gaming Performance Optimization
+            </span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-muted-foreground">
-            Optimize Your Gaming Experience
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+            Enhance your gaming experience with our specialized FPS, input delay, and network optimization tweaks. 
+            Gain the competitive edge with professional-grade performance solutions.
           </p>
-          <Link to="/shop">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg"
-            >
-              Explore Products
-              <ArrowRight className="inline-block ml-2" />
-            </motion.button>
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/shop">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg w-full sm:w-auto"
+              >
+                Explore Products
+                <ArrowRight className="inline-block ml-2" />
+              </motion.button>
+            </Link>
+            <a href="https://discord.gg/PCDJ2Sc98D" target="_blank" rel="noopener noreferrer">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#5865F2] text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-[#4752c4] transition-all duration-300 shadow-lg w-full sm:w-auto"
+              >
+                Join Our Discord
+                <MessageSquare className="inline-block ml-2" />
+              </motion.button>
+            </a>
+          </div>
         </motion.div>
       </div>
 
-      {/* Stats Section */}
+      {/* Stats Section - Animated Marquee */}
       <motion.section
         ref={statsRef}
-        className="py-20 bg-accent"
+        className="py-16 bg-accent overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={statsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="inline-block p-4 rounded-full bg-primary/10 mb-4"
-                >
-                  <stat.icon className="w-8 h-8 text-primary" />
-                </motion.div>
-                <h3 className="text-3xl font-bold mb-2">{stat.value}</h3>
-                <p className="text-muted-foreground">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
+        <div className="mb-10 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={statsInView ? { opacity: 1, y: 0 } : {}}
+            className="text-3xl md:text-4xl font-bold"
+          >
+            Performance Metrics
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={statsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            className="text-muted-foreground mt-2"
+          >
+            Real results from our optimization solutions
+          </motion.p>
+        </div>
+
+        {/* First row - left to right */}
+        <div className="relative">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={statsInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            className="flex space-x-12 py-6"
+          >
+            <motion.div
+              animate={{ x: [0, -1920] }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 30,
+                  ease: "linear",
+                },
+              }}
+              className="flex space-x-12 whitespace-nowrap"
+            >
+              {[...statsRow1, ...statsRow1].map((stat, index) => (
+                <div key={`row1-${index}`} className="flex flex-col items-center bg-card px-8 py-6 rounded-xl shadow-md min-w-[220px]">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="p-4 rounded-full bg-primary/10 mb-4"
+                  >
+                    <stat.icon className="w-8 h-8 text-primary" />
+                  </motion.div>
+                  <h3 className="text-2xl font-bold mb-1">{stat.value}</h3>
+                  <p className="text-muted-foreground text-sm">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Second row - right to left */}
+        <div className="relative mt-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={statsInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.4 }}
+            className="flex space-x-12 py-6"
+          >
+            <motion.div
+              animate={{ x: [-1920, 0] }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 30,
+                  ease: "linear",
+                },
+              }}
+              className="flex space-x-12 whitespace-nowrap"
+            >
+              {[...statsRow2, ...statsRow2].map((stat, index) => (
+                <div key={`row2-${index}`} className="flex flex-col items-center bg-card px-8 py-6 rounded-xl shadow-md min-w-[220px]">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    className="p-4 rounded-full bg-primary/10 mb-4"
+                  >
+                    <stat.icon className="w-8 h-8 text-primary" />
+                  </motion.div>
+                  <h3 className="text-2xl font-bold mb-1">{stat.value}</h3>
+                  <p className="text-muted-foreground text-sm">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </motion.section>
 

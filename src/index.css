@@ -163,3 +163,31 @@
     opacity: 1;
   }
 }
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee 30s linear infinite reverse;
+}
+
+/* Hover effects for stats cards */
+.stats-card {
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
