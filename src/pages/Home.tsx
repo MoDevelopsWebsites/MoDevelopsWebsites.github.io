@@ -258,7 +258,7 @@ const Home = () => {
             Featured Products
           </motion.h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-x-8 lg:gap-x-10 px-2 sm:px-6 md:px-8 lg:px-10">
             {featuredProducts.map((product) => (
               <motion.div
                 key={product.id}
@@ -269,9 +269,9 @@ const Home = () => {
                   scale: 1.05,
                   boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
                 }}
-                className="bg-card rounded-lg overflow-hidden shadow-lg transition-all duration-300"
+                className="bg-card rounded-lg overflow-hidden shadow-lg transition-all duration-300 w-full h-full flex flex-col"
               >
-                <div className="relative h-[200px] overflow-hidden">
+                <div className="relative h-[220px] overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -283,9 +283,10 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                  <div className="flex items-center justify-between">
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-semibold mb-3">{product.name}</h3>
+                  <p className="text-muted-foreground mb-4 flex-grow">{product.description}</p>
+                  <div className="flex items-center justify-between mt-auto">
                     <p className="text-2xl font-bold text-primary">${product.price}</p>
                     <Link to="/shop">
                       <motion.button
