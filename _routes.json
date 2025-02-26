@@ -1,12 +1,7 @@
 {
   "version": 1,
   "include": ["/*"],
-  "exclude": [
-    "/_assets/*",
-    "/_functions/*",
-    "/build/*",
-    "/static/*"
-  ],
+  "exclude": ["/_assets/*", "/_functions/*", "/build/*", "/static/*"],
   "routes": [
     {
       "src": "/*",
