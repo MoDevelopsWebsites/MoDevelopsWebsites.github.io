@@ -13,6 +13,8 @@ import Admin from './pages/Admin';
 import Success from './pages/Success';
 import ProductDetail from './pages/ProductDetail';
 import PaymentPending from './pages/PaymentPending';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 import ChatBot from './components/ChatBot';
 import BackgroundPattern from './components/BackgroundPattern';
 import FloatingObjects from './components/FloatingObjects';
@@ -99,6 +101,8 @@ const App = () => {
                 <Route path="/success" element={<Success />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/payment-pending" element={<PaymentPending />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
               </Routes>
             </main>
             <Footer />

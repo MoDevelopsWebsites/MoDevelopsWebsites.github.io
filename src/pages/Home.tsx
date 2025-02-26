@@ -82,6 +82,13 @@ const featuredProducts = [
     price: 15,
     description: "Reduce input lag for faster response time",
     image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=600&h=400&fit=crop"
+  },
+  {
+    id: 4,
+    name: "Ping Tweaks",
+    price: 15,
+    description: "Optimize network connection for lower latency",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&h=400&fit=crop"
   }
 ];
 
@@ -251,7 +258,7 @@ const Home = () => {
             Featured Products
           </motion.h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
               <motion.div
                 key={product.id}
