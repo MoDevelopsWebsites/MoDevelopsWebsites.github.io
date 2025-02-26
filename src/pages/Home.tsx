@@ -66,18 +66,21 @@ const featuredProducts = [
     id: 1,
     name: "Premium Bundle",
     price: 30,
+    description: "Complete optimization package with all tweaks included",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop"
   },
   {
     id: 2,
     name: "FPS Tweaks",
     price: 15,
+    description: "Boost your frames per second and reduce stuttering",
     image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=600&h=400&fit=crop"
   },
   {
     id: 3,
     name: "Input Delay Tweaks",
     price: 15,
+    description: "Reduce input lag for faster response time",
     image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=600&h=400&fit=crop"
   }
 ];
@@ -234,7 +237,7 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* Featured Products Section */}
+      {/* Featured Products Section - Static Grid */}
       <motion.section
         ref={productsRef}
         className="py-20 bg-background"
@@ -247,44 +250,50 @@ const Home = () => {
           >
             Featured Products
           </motion.h2>
-          <Swiper
-            effect="coverflow"
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView="auto"
-            coverflowEffect={{
-              rotate: 50,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: true,
-            }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[EffectCoverflow, Autoplay]}
-            className="w-full"
-          >
+          
+          <div className="grid md:grid-cols-3 gap-8">
             {featuredProducts.map((product) => (
-              <SwiperSlide key={product.id} className="w-[300px] sm:w-[400px]">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card rounded-lg overflow-hidden shadow-lg"
-                >
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={productsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: product.id * 0.1 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+                className="bg-card rounded-lg overflow-hidden shadow-lg transition-all duration-300"
+              >
+                <div className="relative h-[200px] overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-[200px] object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                    <p className="text-2xl font-bold text-primary">${product.price}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <div className="p-4 text-white">
+                      <p className="font-medium">{product.description}</p>
+                    </div>
                   </div>
-                </motion.div>
-              </SwiperSlide>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+                  <div className="flex items-center justify-between">
+                    <p className="text-2xl font-bold text-primary">${product.price}</p>
+                    <Link to="/shop">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+                      >
+                        View Details
+                      </motion.button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
             ))}
-          </Swiper>
+          </div>
         </div>
       </motion.section>
 

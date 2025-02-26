@@ -43,7 +43,7 @@ const Cart = () => {
       </div>
     ), {
       duration: 10000,
-      position: 'top-center',
+      position: 'bottom-center',
     });
   };
 

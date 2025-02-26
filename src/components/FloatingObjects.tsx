@@ -12,7 +12,7 @@ const shapes = [
 const FloatingObjects = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {[...Array(15)].map((_, i) => {
+      {[...Array(20)].map((_, i) => {
         const shape = shapes[Math.floor(Math.random() * shapes.length)];
         const size = Math.random() * 40 + 20; // Increased size
         const left = Math.random() * 100;
@@ -27,7 +27,8 @@ const FloatingObjects = () => {
               left: `${left}%`,
               width: size,
               height: size,
-              opacity: 0.4 // Increased opacity
+              opacity: 0.4, // Increased opacity
+              zIndex: -1 // Ensure it's behind content
             }}
             initial={{ y: '110vh', rotate: 0 }}
             animate={{

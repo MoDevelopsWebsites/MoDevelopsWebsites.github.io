@@ -11,6 +11,8 @@ import Contact from './pages/Contact';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import Success from './pages/Success';
+import ProductDetail from './pages/ProductDetail';
+import PaymentPending from './pages/PaymentPending';
 import ChatBot from './components/ChatBot';
 import BackgroundPattern from './components/BackgroundPattern';
 import FloatingObjects from './components/FloatingObjects';
@@ -51,14 +53,30 @@ const App = () => {
                 transition={{ duration: 0.3 }}
                 className="bg-primary/5 border-b border-primary/10 relative z-50 overflow-hidden"
               >
-                <div className="max-w-7xl mx-auto px-4 py-2">
-                  <div className="flex items-center justify-center space-x-2 text-sm">
-                    <Zap className="w-4 h-4 text-primary animate-pulse" />
-                    <span className="font-medium">All services are fully operational</span>
-                    <span className="hidden sm:inline text-muted-foreground">•</span>
-                    <span className="hidden sm:inline text-muted-foreground">
-                      Place your order today and enjoy our performance optimization tweaks!
-                    </span>
+                <div className="max-w-7xl mx-auto px-4 py-2 overflow-hidden">
+                  <div className="flex items-center justify-center space-x-2 text-sm whitespace-nowrap">
+                    <div className="animate-marquee inline-flex items-center">
+                      <Zap className="w-4 h-4 text-primary animate-pulse" />
+                      <span className="font-medium ml-2">All services are fully operational</span>
+                      <span className="mx-4 text-muted-foreground">•</span>
+                      <span className="text-muted-foreground">
+                        Place your order today and enjoy our performance optimization tweaks!
+                      </span>
+                      <span className="mx-4 text-muted-foreground">•</span>
+                      <Zap className="w-4 h-4 text-primary animate-pulse mx-2" />
+                      <span className="font-medium">Instant delivery via Discord</span>
+                      <span className="mx-4 text-muted-foreground">•</span>
+                      <span className="text-muted-foreground">
+                        24/7 customer support available
+                      </span>
+                      <span className="mx-4 text-muted-foreground">•</span>
+                      <Zap className="w-4 h-4 text-primary animate-pulse mx-2" />
+                      <span className="font-medium">All services are fully operational</span>
+                      <span className="mx-4 text-muted-foreground">•</span>
+                      <span className="text-muted-foreground">
+                        Place your order today and enjoy our performance optimization tweaks!
+                      </span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -79,12 +97,14 @@ const App = () => {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/success" element={<Success />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/payment-pending" element={<PaymentPending />} />
               </Routes>
             </main>
             <Footer />
+            <ChatBot />
+            <Toaster position="bottom-right" />
           </div>
-          <ChatBot />
-          <Toaster position="bottom-right" />
         </div>
       </Router>
     </CartProvider>
