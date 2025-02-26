@@ -53,7 +53,7 @@ const App = () => {
                 transition={{ duration: 0.3 }}
                 className="bg-primary/5 border-b border-primary/10 relative z-50 overflow-hidden"
               >
-                <div className="max-w-7xl mx-auto px-4 py-2 overflow-hidden">
+                <div className="w-full px-6 sm:px-10 lg:px-16 py-2 overflow-hidden">
                   <div className="flex items-center justify-center space-x-2 text-sm whitespace-nowrap">
                     <div className="animate-marquee inline-flex items-center">
                       <Zap className="w-4 h-4 text-primary animate-pulse" />

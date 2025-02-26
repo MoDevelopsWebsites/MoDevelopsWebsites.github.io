@@ -36,6 +36,44 @@ const commonQuestions = [
   {
     question: "How long does delivery take?",
     answer: "Delivery is instant! After purchase, you'll get immediate access through our Discord support system."
+  },
+  {
+    question: "Will the tweaks affect my warranty?",
+    answer: "No, our tweaks don't make any permanent hardware changes. They only modify software settings that can be easily reverted, so your warranty remains intact."
+  },
+  {
+    question: "Do I need technical knowledge?",
+    answer: "Not at all! Our team provides step-by-step guidance through the entire process. We've designed our service to be accessible for all users regardless of technical expertise."
+  },
+  {
+    question: "Which games do your tweaks support?",
+    answer: (
+      <div className="space-y-2">
+        <p>Our tweaks support all major competitive games including:</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Fortnite</li>
+          <li>Valorant</li>
+          <li>Call of Duty (All titles)</li>
+          <li>Apex Legends</li>
+          <li>Counter-Strike 2</li>
+          <li>Rainbow Six Siege</li>
+          <li>And many more!</li>
+        </ul>
+        <p className="text-xs mt-2">If you have a specific game not listed, feel free to ask in our Discord.</p>
+      </div>
+    )
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit/debit cards through our secure Stripe payment system, as well as PayPal for your convenience and security."
+  },
+  {
+    question: "Can I get a refund?",
+    answer: "We offer a 24-hour satisfaction guarantee. If you're not satisfied with our service within 24 hours of purchase, we'll provide a full refund. Please contact our support team through Discord to process any refund requests."
+  },
+  {
+    question: "How much FPS improvement can I expect?",
+    answer: "Results vary depending on your hardware, but most users experience a 15-40% increase in FPS. Lower-end systems often see the most dramatic improvements, while high-end systems may see more stability benefits and reduced input delay."
   }
 ];
 
@@ -104,14 +142,77 @@ const ChatBot = () => {
     const lowercaseInput = inputValue.toLowerCase();
     let botResponse = "I'm not sure about that. Please try asking one of the common questions above or join our Discord for specific help.";
 
-    if (lowercaseInput.includes('after purchase') || lowercaseInput.includes('bought')) {
+    // Check for purchase-related questions
+    if (lowercaseInput.includes('after purchase') || lowercaseInput.includes('bought') || lowercaseInput.includes('receive') || lowercaseInput.includes('get my')) {
       botResponse = commonQuestions[0].answer;
-    } else if (lowercaseInput.includes('safe') || lowercaseInput.includes('security')) {
+    } 
+    // Check for safety-related questions
+    else if (lowercaseInput.includes('safe') || lowercaseInput.includes('security') || lowercaseInput.includes('risk') || lowercaseInput.includes('damage')) {
       botResponse = commonQuestions[2].answer;
-    } else if (lowercaseInput.includes('delivery') || lowercaseInput.includes('receive')) {
+    } 
+    // Check for delivery-related questions
+    else if (lowercaseInput.includes('delivery') || lowercaseInput.includes('receive') || lowercaseInput.includes('how long') || lowercaseInput.includes('wait time')) {
       botResponse = commonQuestions[3].answer;
-    } else if (lowercaseInput.includes('work') || lowercaseInput.includes('how')) {
+    } 
+    // Check for how-it-works questions
+    else if (lowercaseInput.includes('work') || lowercaseInput.includes('how') || lowercaseInput.includes('function') || lowercaseInput.includes('do they')) {
       botResponse = commonQuestions[1].answer;
+    }
+    // Check for warranty questions
+    else if (lowercaseInput.includes('warranty') || lowercaseInput.includes('guarantee') || lowercaseInput.includes('permanent')) {
+      botResponse = commonQuestions[4].answer;
+    }
+    // Check for technical knowledge questions
+    else if (lowercaseInput.includes('technical') || lowercaseInput.includes('difficult') || lowercaseInput.includes('complicated') || lowercaseInput.includes('hard to')) {
+      botResponse = commonQuestions[5].answer;
+    }
+    // Check for game support questions
+    else if (lowercaseInput.includes('game') || lowercaseInput.includes('support') || lowercaseInput.includes('fortnite') || lowercaseInput.includes('valorant') || lowercaseInput.includes('cod') || lowercaseInput.includes('apex')) {
+      botResponse = commonQuestions[6].answer;
+    }
+    // Check for payment questions
+    else if (lowercaseInput.includes('payment') || lowercaseInput.includes('pay') || lowercaseInput.includes('credit card') || lowercaseInput.includes('paypal')) {
+      botResponse = commonQuestions[7].answer;
+    }
+    // Check for refund questions
+    else if (lowercaseInput.includes('refund') || lowercaseInput.includes('money back') || lowercaseInput.includes('cancel') || lowercaseInput.includes('return')) {
+      botResponse = commonQuestions[8].answer;
+    }
+    // Check for performance improvement questions
+    else if (lowercaseInput.includes('fps') || lowercaseInput.includes('performance') || lowercaseInput.includes('improve') || lowercaseInput.includes('better') || lowercaseInput.includes('increase')) {
+      botResponse = commonQuestions[9].answer;
+    }
+    // Check for Discord-related questions
+    else if (lowercaseInput.includes('discord') || lowercaseInput.includes('server') || lowercaseInput.includes('join') || lowercaseInput.includes('support')) {
+      botResponse = (
+        <div className="space-y-2">
+          <p>Our Discord server is the central hub for all support and service delivery. After purchase, you'll need to join our server to receive your tweaks.</p>
+          <a
+            href="https://discord.gg/PCDJ2Sc98D"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-blue-500 hover:text-blue-600 mt-2"
+          >
+            Join Discord <ExternalLink className="w-4 h-4 ml-1" />
+          </a>
+        </div>
+      );
+    }
+    // Check for contact questions
+    else if (lowercaseInput.includes('contact') || lowercaseInput.includes('help') || lowercaseInput.includes('support') || lowercaseInput.includes('talk to')) {
+      botResponse = (
+        <div className="space-y-2">
+          <p>The fastest way to get support is through our Discord server. Our team is available 24/7 to assist you with any questions or issues.</p>
+          <a
+            href="https://discord.gg/PCDJ2Sc98D"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-blue-500 hover:text-blue-600 mt-2"
+          >
+            Join Discord <ExternalLink className="w-4 h-4 ml-1" />
+          </a>
+        </div>
+      );
     }
 
     setInputValue('');
@@ -180,7 +281,7 @@ const ChatBot = () => {
                       transition={{ delay: 0.2 }}
                     >
                       <p className="text-sm font-medium">Common Questions:</p>
-                      <div className="space-y-2">
+                      <div className="space-y-2 max-h-[200px] overflow-y-auto pr-1">
                         {commonQuestions.map((q, i) => (
                           <motion.button
                             key={i}

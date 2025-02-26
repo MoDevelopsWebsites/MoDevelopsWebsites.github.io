@@ -31,14 +31,15 @@ const Navbar = () => {
         isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-6 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between h-16">
+          {/* Logo - Left Side */}
           <Link to="/" className="flex items-center space-x-2">
             <Zap className="w-8 h-8 text-primary" />
             <span className="font-bold text-xl">Stunnas Tweaks</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Right Side */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
@@ -78,7 +79,7 @@ const Navbar = () => {
           exit={{ opacity: 0, y: -20 }}
           className="md:hidden bg-background border-t"
         >
-          <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="px-6 pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
               <Link
                 key={item.path}
