@@ -135,8 +135,7 @@ const ChatBot = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="bg-card rounded-lg shadow-xl border border-border backdrop-blur-sm mb-2 mr-2"
-            style={{ width: '384px' }}
+            className="bg-card rounded-lg shadow-xl border border-border backdrop-blur-sm mb-2 mr-2 w-full max-w-[calc(100vw-2rem)] sm:max-w-[384px]"
           >
             <motion.div 
               className="p-4 border-b border-border flex justify-between items-center"
@@ -198,7 +197,7 @@ const ChatBot = () => {
                       </div>
                     </motion.div>
 
-                    <div className="h-64 overflow-y-auto space-y-4 my-4 scroll-smooth">
+                    <div className="h-48 sm:h-64 overflow-y-auto space-y-4 my-4 scroll-smooth">
                       <AnimatePresence mode="popLayout">
                         {messages.map((message, index) => (
                           <motion.div
