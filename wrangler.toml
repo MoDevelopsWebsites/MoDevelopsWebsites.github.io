@@ -8,14 +8,17 @@ entry-point = "."
 [build]
 command = "npm run build"
 output_dir = "dist"
+# Add cache control to ensure fresh builds
+[build.upload]
+format = "service-worker"
+dir = "dist"
+# Clear cache on each deploy
+cache_control_max_age = "0"
 
 [[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
-
-[build.upload]
-format = "service-worker"
 
 [env.production]
 workers_dev = false
@@ -24,10 +27,16 @@ route = "stunnastweaks.pages.dev/*"
 [env.staging]
 workers_dev = true
 
-[miniflare]
-kv_persist = true
-cache_persist = true
-
+# Development settings
 [dev]
 port = 5173
 local_protocol = "http"
+# Disable caching in development
+cache = false
+
+# Clear all caches on deploy
+[env.production.build.upload]
+cache_control_max_age = "0"
+
+[env.staging.build.upload]
+cache_control_max_age = "0"
