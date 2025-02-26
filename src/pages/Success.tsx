@@ -1,41 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle, ArrowRight, Copy } from 'lucide-react';
+import { CheckCircle, ArrowRight, Copy, MessageSquare } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useCart } from 'react-use-cart';
 
 const Success = () => {
   const navigate = useNavigate();
   const { emptyCart } = useCart();
+  const [hasJoinedDiscord, setHasJoinedDiscord] = useState(false);
   const orderId = Math.random().toString(36).substring(2, 15).toUpperCase();
 
   useEffect(() => {
     // Clear the cart on success page load
     emptyCart();
-
-    // Show Discord prompt
-    toast((t) => (
-      <div className="flex flex-col items-center space-y-2">
-        <p className="text-sm font-medium">Please join our Discord server to redeem your purchase:</p>
-        <a
-          href="https://discord.gg/PCDJ2Sc98D"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:text-blue-600 underline"
-        >
-          Join Discord Server
-        </a>
-      </div>
-    ), {
-      duration: 10000,
-      position: 'top-center',
-    });
   }, [emptyCart]);
 
   const copyOrderId = () => {
     navigator.clipboard.writeText(orderId);
     toast.success('Order ID copied to clipboard');
+  };
+
+  const handleDiscordClick = () => {
+    setHasJoinedDiscord(true);
+    // Open Discord in a new tab
+    window.open('https://discord.gg/PCDJ2Sc98D', '_blank');
   };
 
   return (
@@ -66,26 +55,42 @@ const Success = () => {
             </button>
           </div>
         </div>
-        <p className="text-muted-foreground mb-8">
-          Please save your Order ID and join our Discord server to redeem your purchase.
-        </p>
-        <div className="space-y-4">
-          <a
-            href="https://discord.gg/PCDJ2Sc98D"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full bg-primary text-white py-3 rounded-md hover:bg-primary/90 transition-colors"
-          >
-            Join Discord
-          </a>
+
+        {/* Discord Join Prompt - Persistent until clicked */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`mb-8 p-4 ${hasJoinedDiscord ? 'bg-green-500/10' : 'bg-primary/10'} rounded-lg border-2 ${hasJoinedDiscord ? 'border-green-500/20' : 'border-primary/20'}`}
+        >
+          <MessageSquare className={`w-8 h-8 mx-auto mb-3 ${hasJoinedDiscord ? 'text-green-500' : 'text-primary'}`} />
+          <h3 className="text-lg font-semibold mb-2">
+            {hasJoinedDiscord ? 'Discord Server Joined!' : 'Important: Join Discord to Redeem'}
+          </h3>
+          <p className="text-muted-foreground mb-4">
+            {hasJoinedDiscord 
+              ? 'Thank you for joining! Please create a support ticket to receive your purchase.'
+              : 'You must join our Discord server to receive your purchase. Click the button below to join.'}
+          </p>
           <button
-            onClick={() => navigate('/')}
-            className="w-full border border-input bg-background hover:bg-accent hover:text-accent-foreground py-3 rounded-md transition-colors flex items-center justify-center space-x-2"
+            onClick={handleDiscordClick}
+            className={`w-full py-3 rounded-md transition-colors flex items-center justify-center space-x-2 ${
+              hasJoinedDiscord
+                ? 'bg-green-500 text-white hover:bg-green-600'
+                : 'bg-primary text-white hover:bg-primary/90'
+            }`}
           >
-            <span>Return Home</span>
+            <span>{hasJoinedDiscord ? 'Return to Discord' : 'Join Discord Server'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-        </div>
+        </motion.div>
+
+        <button
+          onClick={() => navigate('/')}
+          className="w-full border border-input bg-background hover:bg-accent hover:text-accent-foreground py-3 rounded-md transition-colors flex items-center justify-center space-x-2"
+        >
+          <span>Return Home</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
       </motion.div>
     </div>
   );
