@@ -18,6 +18,7 @@ import Privacy from './pages/Privacy';
 import ChatBot from './components/ChatBot';
 import BackgroundPattern from './components/BackgroundPattern';
 import FloatingObjects from './components/FloatingObjects';
+import ScrollToTop from './components/ScrollToTop';
 import { CartProvider } from 'react-use-cart';
 
 const App = () => {
@@ -85,10 +86,13 @@ const App = () => {
             )}
           </AnimatePresence>
 
+          {/* Background Pattern and Floating Objects - Applied to all pages */}
           <div className="fixed inset-0 z-0">
+            <div className="bg-pattern absolute inset-0"></div>
             <BackgroundPattern />
             <FloatingObjects />
           </div>
+          
           <div className="relative z-10 flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">
@@ -107,6 +111,7 @@ const App = () => {
             </main>
             <Footer />
             <ChatBot />
+            <ScrollToTop />
             <Toaster position="bottom-right" />
           </div>
         </div>

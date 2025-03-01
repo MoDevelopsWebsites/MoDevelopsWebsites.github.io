@@ -29,20 +29,17 @@ const BackgroundPattern = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="bg-pattern absolute inset-0" />
-      <motion.div
-        ref={containerRef}
-        className="absolute inset-0 grid grid-flow-row-dense pointer-events-none"
-        style={{
-          gridTemplateColumns: 'repeat(auto-fill, 40px)',
-          gap: '0px'
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ duration: 1 }}
-      />
-    </div>
+    <motion.div
+      ref={containerRef}
+      className="absolute inset-0 grid grid-flow-row-dense pointer-events-none"
+      style={{
+        gridTemplateColumns: 'repeat(auto-fill, 40px)',
+        gap: '0px'
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 0.9 }}
+      transition={{ duration: 1 }}
+    />
   );
 }
 

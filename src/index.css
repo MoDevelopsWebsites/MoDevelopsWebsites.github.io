@@ -62,8 +62,8 @@
 .bg-pattern {
   background-color: hsl(var(--background));
   background-image: 
-    linear-gradient(hsl(var(--border) / 0.3) 2px, transparent 2px),
-    linear-gradient(90deg, hsl(var(--border) / 0.3) 2px, transparent 2px);
+    linear-gradient(hsl(var(--border) / 0.8) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.8) 1px, transparent 1px);
   background-size: 40px 40px;
   background-position: center center;
 }
@@ -80,7 +80,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  border: 2px solid hsl(var(--border) / 0.3);
+  border: 1px solid hsl(var(--border) / 0.8);
   opacity: 1;
   transition: all 0.3s ease;
 }
@@ -214,4 +214,22 @@
 
 .gaming-glow-green::after {
   background: radial-gradient(circle at center, rgba(0, 255, 0, 0.15), transparent 70%);
+}
+
+/* Custom scrollbar for chat */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.2);
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.3);
 }

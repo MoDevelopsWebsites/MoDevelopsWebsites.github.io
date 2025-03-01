@@ -83,7 +83,7 @@ const messageVariants = {
     opacity: 1, 
     y: 0,
     transition: { 
-      duration: 0.5,
+      duration: 0.3,
       ease: [0.4, 0, 0.2, 1]
     }
   },
@@ -91,7 +91,7 @@ const messageVariants = {
     opacity: 0,
     y: -20,
     transition: { 
-      duration: 0.3,
+      duration: 0.2,
       ease: [0.4, 0, 1, 1]
     }
   }
@@ -103,7 +103,7 @@ const containerVariants = {
     opacity: 1, 
     scale: 1,
     transition: { 
-      duration: 0.3,
+      duration: 0.2,
       ease: [0.4, 0, 0.2, 1]
     }
   },
@@ -111,10 +111,16 @@ const containerVariants = {
     opacity: 0, 
     scale: 0.95,
     transition: { 
-      duration: 0.2,
+      duration: 0.15,
       ease: [0.4, 0, 1, 1]
     }
   }
+};
+
+const buttonHoverVariants = {
+  initial: { scale: 1 },
+  hover: { scale: 1.05, transition: { duration: 0.15 } },
+  tap: { scale: 0.95, transition: { duration: 0.1 } }
 };
 
 const ChatBot = () => {
@@ -236,29 +242,36 @@ const ChatBot = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="bg-card rounded-lg shadow-xl border border-border backdrop-blur-sm mb-2 mr-2 w-full max-w-[calc(100vw-2rem)] sm:max-w-[384px]"
+            className="bg-card/95 backdrop-blur-md rounded-xl shadow-xl border border-border/50 mb-2 mr-2 w-full max-w-[calc(100vw-2rem)] sm:max-w-[384px] overflow-hidden"
           >
             <motion.div 
-              className="p-4 border-b border-border flex justify-between items-center"
+              className="p-4 border-b border-border/50 flex justify-between items-center bg-gradient-to-r from-primary/5 to-transparent"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.05 }}
             >
-              <h3 className="font-semibold">Support Chat</h3>
+              <div className="flex items-center space-x-2">
+                <MessageSquare className="w-5 h-5 text-primary" />
+                <h3 className="font-semibold">Support Chat</h3>
+              </div>
               <div className="flex items-center space-x-2">
                 <motion.button
                   onClick={toggleMinimize}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-150"
+                  variants={buttonHoverVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
                   {isMinimized ? <Maximize2 className="w-5 h-5" /> : <Minimize2 className="w-5 h-5" />}
                 </motion.button>
                 <motion.button
                   onClick={() => setIsOpen(false)}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-150"
+                  variants={buttonHoverVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
                   <X className="w-5 h-5" />
                 </motion.button>
@@ -271,26 +284,29 @@ const ChatBot = () => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <div className="p-4 space-y-4">
                     <motion.div 
                       className="space-y-2"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
+                      transition={{ delay: 0.1 }}
                     >
-                      <p className="text-sm font-medium">Common Questions:</p>
-                      <div className="space-y-2 max-h-[200px] overflow-y-auto pr-1">
+                      <p className="text-sm font-medium text-primary">Common Questions:</p>
+                      <div className="space-y-1.5 max-h-[180px] overflow-y-auto pr-1 scrollbar-thin">
                         {commonQuestions.map((q, i) => (
                           <motion.button
                             key={i}
                             onClick={() => handleQuestionClick(q.question, q.answer)}
-                            className="text-sm text-left w-full px-3 py-2 rounded-md hover:bg-accent transition-all duration-200"
-                            whileHover={{ scale: 1.02, backgroundColor: 'hsl(var(--accent))' }}
-                            initial={{ opacity: 0, x: -20 }}
+                            className="text-sm text-left w-full px-3 py-2 rounded-md hover:bg-accent transition-all duration-150"
+                            variants={buttonHoverVariants}
+                            initial="initial"
+                            whileHover="hover"
+                            whileTap="tap"
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 + i * 0.1 }}
+                            initial={{ opacity: 0, x: -10 }}
+                            transition={{ delay: 0.1 + i * 0.03 }}
                           >
                             {q.question}
                           </motion.button>
@@ -298,7 +314,21 @@ const ChatBot = () => {
                       </div>
                     </motion.div>
 
-                    <div className="h-48 sm:h-64 overflow-y-auto space-y-4 my-4 scroll-smooth">
+                    <div className="h-48 sm:h-64 overflow-y-auto space-y-3 my-4 scroll-smooth bg-accent/10 rounded-lg p-3">
+                      {messages.length === 0 && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.2 }}
+                          className="flex justify-center items-center h-full"
+                        >
+                          <div className="text-center text-muted-foreground">
+                            <MessageSquare className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                            <p>Ask a question or select from the common questions above</p>
+                          </div>
+                        </motion.div>
+                      )}
+                      
                       <AnimatePresence mode="popLayout">
                         {messages.map((message, index) => (
                           <motion.div
@@ -314,11 +344,11 @@ const ChatBot = () => {
                               className={`max-w-[80%] rounded-lg p-3 ${
                                 message.type === 'user'
                                   ? 'bg-primary text-primary-foreground'
-                                  : 'bg-accent'
+                                  : 'bg-card shadow-sm'
                               }`}
-                              initial={{ scale: 0.9, opacity: 0 }}
+                              initial={{ scale: 0.95, opacity: 0 }}
                               animate={{ scale: 1, opacity: 1 }}
-                              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                              transition={{ type: "spring", stiffness: 300, damping: 25 }}
                             >
                               {message.content}
                             </motion.div>
@@ -330,10 +360,10 @@ const ChatBot = () => {
 
                   <motion.form 
                     onSubmit={handleSubmit} 
-                    className="p-4 border-t border-border"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="p-4 border-t border-border/50 bg-gradient-to-r from-transparent to-primary/5"
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
+                    transition={{ delay: 0.2 }}
                   >
                     <div className="flex space-x-2">
                       <input
@@ -341,13 +371,16 @@ const ChatBot = () => {
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         placeholder="Type your question..."
-                        className="flex-1 px-3 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+                        className="flex-1 px-3 py-2 rounded-md border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-150 bg-card"
                       />
                       <motion.button
                         type="submit"
-                        className="bg-primary text-white p-2 rounded-md hover:bg-primary/90 transition-all duration-200"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="bg-primary text-white p-2 rounded-md hover:bg-primary/90 transition-all duration-150"
+                        variants={buttonHoverVariants}
+                        initial="initial"
+                        whileHover="hover"
+                        whileTap="tap"
+                        disabled={!inputValue.trim()}
                       >
                         <Send className="w-5 h-5" />
                       </motion.button>
@@ -362,9 +395,11 @@ const ChatBot = () => {
 
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary/90 transition-all duration-300"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className="bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary/90 transition-all duration-150"
+        variants={buttonHoverVariants}
+        initial="initial"
+        whileHover="hover"
+        whileTap="tap"
       >
         <MessageSquare className="w-6 h-6" />
       </motion.button>
