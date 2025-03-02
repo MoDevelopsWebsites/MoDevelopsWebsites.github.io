@@ -19,11 +19,13 @@ import ChatBot from './components/ChatBot';
 import BackgroundPattern from './components/BackgroundPattern';
 import FloatingObjects from './components/FloatingObjects';
 import ScrollToTop from './components/ScrollToTop';
+import UpdatePopup from './components/UpdatePopup';
 import { CartProvider } from 'react-use-cart';
 
 const App = () => {
   const [showAlert, setShowAlert] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showUpdatePopup, setShowUpdatePopup] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +43,28 @@ const App = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  useEffect(() => {
+    // Check if the user has seen the popup recently
+    const lastPopupTime = localStorage.getItem('lastUpdatePopupTime');
+    const currentTime = new Date().getTime();
+    
+    // Show popup if user hasn't seen it in the last 3 days or never seen it
+    if (!lastPopupTime || currentTime - parseInt(lastPopupTime) > 3 * 24 * 60 * 60 * 1000) {
+      // Delay popup appearance for better UX
+      const timer = setTimeout(() => {
+        setShowUpdatePopup(true);
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleCloseUpdatePopup = () => {
+    setShowUpdatePopup(false);
+    // Store the current time when user closes the popup
+    localStorage.setItem('lastUpdatePopupTime', new Date().getTime().toString());
+  };
 
   return (
     <CartProvider>
@@ -115,6 +139,9 @@ const App = () => {
             <Toaster position="bottom-right" />
           </div>
         </div>
+
+        {/* Update Popup */}
+        {showUpdatePopup && <UpdatePopup onClose={handleCloseUpdatePopup} />}
       </Router>
     </CartProvider>
   );
