@@ -37,14 +37,14 @@ const UpdatePopup: React.FC<UpdatePopupProps> = ({ onClose }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <motion.div
-          className="bg-card w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-border"
+          className="bg-card w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-border my-4"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -55,7 +55,8 @@ const UpdatePopup: React.FC<UpdatePopupProps> = ({ onClose }) => {
           <div className="relative bg-gradient-to-r from-primary/10 to-primary/5 p-6 pb-4">
             <button 
               onClick={onClose}
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors p-2"
+              aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
@@ -90,7 +91,7 @@ const UpdatePopup: React.FC<UpdatePopupProps> = ({ onClose }) => {
           </div>
           
           {/* Content */}
-          <div className="p-6">
+          <div className="p-6 max-h-[60vh] overflow-y-auto">
             {activeTab === 'updates' && (
               <div className="space-y-6">
                 <div className="space-y-4">
